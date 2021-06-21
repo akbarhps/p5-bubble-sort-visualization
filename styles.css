@@ -12,7 +12,7 @@ body {
     height: 100%;
     display: grid;
     grid-template-columns: auto;
-    grid-template-rows: 20vh 80vh;
+    grid-template-rows: 90vh 10vh;
 }
 
 #container > div {
@@ -23,16 +23,13 @@ body {
 #controller {
     z-index: 99;
     align-items: center;
-    padding-bottom: 1%;
 }
 
 #view {
     align-items: flex-end;
-    padding: 5px 0;
 }
 
 button, input {
-    border: none;
     color: black;
     font-size: 16px;
     padding: 10px;
@@ -41,6 +38,12 @@ button, input {
     cursor: pointer;
     border: 2px solid slategrey;
     border-radius: 4px;
+}
+
+input {
+    padding: 10px 3px;
+    width: 60px;
+    height: auto;
 }
 
 button:hover {
