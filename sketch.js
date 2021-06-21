@@ -5,7 +5,6 @@
  */
 
 let array = shuffleArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
-let stepPressed = false;
 let run = false;
 
 let stepIterations = 1;
@@ -18,7 +17,7 @@ function setup() {
 }
 
 function draw() {
-    if (run || stepPressed) {
+    if (run) {
         doStep();
     }
 }
@@ -30,10 +29,7 @@ function windowResized() {
 
 function setupLayout() {
     createCanvas(windowWidth - 20, windowHeight - 100).parent('view');
-    let stepButton = select("#doStep").mousePressed(startStep);
-    stepButton.mouseReleased(stopStep);
-    stepButton.mouseOut(stopStep);
-
+    select("#doStep").mousePressed(doStep);
     select("#doRun").mousePressed(doRun);
     select("#doShuffle").mousePressed(doShuffle);
     select("#openGithub").mousePressed(openGithub);
@@ -41,9 +37,17 @@ function setupLayout() {
 }
 
 function sizeChangeListener() {
-    document.getElementById('size').addEventListener('input', (event) => {
+    let sizeInput = document.getElementById('size');
+    sizeInput.addEventListener('input', (event) => {
         stepIterations = 0;
-        recreateArray(Number(event.target.value));
+        let value = Number(event.target.value);
+        if (value < 10) {
+            value = 10;
+        } else if (value > 50) {
+            value = 50;
+        }
+        sizeInput.value = value;
+        recreateArray(value);
     });
 }
 
@@ -71,17 +75,9 @@ function doStep() {
         stepIterations++;
     }
     if (stepIterations >= array.length) {
-        !stepPressed ? doRun() : stepPressed = false;
+        doRun();
     }
     drawRectangle();
-}
-
-function startStep() {
-    stepPressed = true;
-}
-
-function stopStep() {
-    stepPressed = false;
 }
 
 function doRun() {
