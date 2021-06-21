@@ -28,7 +28,7 @@ function windowResized() {
 }
 
 function setupLayout() {
-    createCanvas(windowWidth - 20, windowHeight - 100).parent('view');
+    createCanvas(windowWidth - 20, windowHeight - 200).parent('view');
     select("#doStep").mousePressed(doStep);
     select("#doRun").mousePressed(doRun);
     select("#doShuffle").mousePressed(doShuffle);
